@@ -202,13 +202,18 @@ def analyze_sentiment_rule_based(text: str) -> Dict[str, any]:
             negative_score += intensifier_multiplier
             negative_matches.append(word)
     
-    # Handle negations (simple approach)
-    negation_words = {'not', 'no', 'never', 'nothing', 'nowhere', 'nobody'}
+    # Handle negations (improved approach)
+    negation_words = {'not', 'no', 'never', 'nothing', 'nowhere', 'nobody', "n't", 'dont', "don't"}
+    negation_found = False
     for neg_word in negation_words:
         if neg_word in text_lower:
-            # Flip scores if negation is present (simplified)
-            positive_score, negative_score = negative_score * 0.5, positive_score * 0.5
+            negation_found = True
             break
+    
+    # If negation is found, reduce positive sentiment and boost negative slightly
+    if negation_found:
+        positive_score *= 0.3  # Reduce positive sentiment significantly
+        negative_score *= 1.2  # Slightly boost negative sentiment
     
     # Determine overall sentiment
     if positive_score > negative_score:

@@ -61,7 +61,7 @@ python mnist_cnn_classifier.py
 - **Training Time**: ~12 epochs (early stopping)
 - **Model Size**: 93,322 parameters (364.54 KB)
 
-## 🏗️ Model Architectures
+##  Model Architectures
 
 ### Task 1: Decision Tree
 ```
